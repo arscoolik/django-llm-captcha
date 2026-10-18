@@ -1,0 +1,16 @@
+{% extends "llmgate/base.html" %}{% load static %}
+{% block title %}Confirm you're human{% endblock %}
+{% block body %}
+  <div id="llmgate" data-mode="verify" data-next="{{ next }}" data-csrf="{{ csrf_token }}"
+       data-options-url="{% url 'llmgate:verify_options' %}"
+       data-submit-url="{% url 'llmgate:verify_submit' %}">
+    <h1>Confirm you're human</h1>
+    <p id="llmgate-status">This request looked automated. Use your fingerprint,
+      face, or device PIN to continue.</p>
+    <button id="llmgate-go" type="button">Continue with passkey</button>
+    <p class="note">Nothing is sent that could be copied, forwarded, or filled
+      in on your behalf.</p>
+    <noscript>This check needs JavaScript.</noscript>
+  </div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'llmgate/passkey.js' %}" defer></script>{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "llmgate/base.html" %}{% load static %}
+{% block title %}Your passkeys{% endblock %}
+{% block body %}
+  <div id="llmgate" data-mode="register" data-csrf="{{ csrf_token }}"
+       data-options-url="{% url 'llmgate:register_options' %}"
+       data-submit-url="{% url 'llmgate:register_verify' %}">
+    <h1>Your passkeys</h1>
+    <ul class="list">
+      {% for c in credentials %}
+        <li><strong>{{ c }}</strong><span>added {{ c.created_at|date:"j M Y" }}
+          &middot; last used {{ c.last_used_at|default:"never" }}</span></li>
+      {% empty %}
+        <li><span>None yet. Add one so automated requests can be cleared.</span></li>
+      {% endfor %}
+    </ul>
+    <button id="llmgate-go" type="button">Add a passkey</button>
+    <p class="note" id="llmgate-status">The private key never leaves your device.</p>
+    <noscript>This needs JavaScript.</noscript>
+  </div>
+{% endblock %}
+{% block scripts %}<script src="{% static 'llmgate/passkey.js' %}" defer></script>{% endblock %}

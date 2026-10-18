@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}llmgate demo{% endblock %}</title>
+<style>
+ :root{color-scheme:light dark;--fg:#111;--muted:#666;--bg:#fafaf9;--card:#fff;--line:#e5e5e3;--accent:#2563eb}
+ @media (prefers-color-scheme:dark){:root{--fg:#ededed;--muted:#9a9a9a;--bg:#131313;--card:#1c1c1c;--line:#2e2e2e;--accent:#60a5fa}}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--fg);padding:24px;
+   font:15px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+ main{max-width:40rem;margin:0 auto}
+ nav{display:flex;gap:1rem;flex-wrap:wrap;padding-bottom:1rem;margin-bottom:1.5rem;
+   border-bottom:1px solid var(--line);font-size:.9rem}
+ a{color:var(--accent)} h1{font-size:1.15rem}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
+ .muted{color:var(--muted);font-size:.85rem}
+ button{font:inherit;padding:0;border:0;background:none;color:var(--accent);cursor:pointer}
+</style></head><body><main>
+<nav>
+  <a href="/">Home</a><a href="/reports/">Reports</a>
+  <a href="/llmgate/passkeys/">My passkeys</a>
+  {% if user.is_authenticated %}
+    <form method="post" action="/accounts/logout/" style="margin-left:auto">{% csrf_token %}
+      <button>Sign out ({{ user }})</button></form>
+  {% else %}<a href="/accounts/login/" style="margin-left:auto">Sign in</a>{% endif %}
+</nav>
+{% block body %}{% endblock %}
+</main></body></html>

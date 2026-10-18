@@ -1,0 +1,52 @@
+[project]
+name = "django-llmgate"
+version = "0.1.1"
+description = "Require a passkey from automated requests. Browsers pass untouched."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "YOUR NAME", email = "you@example.com" }]
+keywords = ["django", "webauthn", "passkey", "bot", "captcha", "llm", "agent"]
+
+dependencies = ["Django>=4.2"]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Security",
+]
+
+[project.optional-dependencies]
+passkeys = ["webauthn>=2.0,<4"]
+# Test-only. soft-webauthn 0.1.x imports fido2.ctap2.AttestedCredentialData,
+# which only exists in fido2 0.9.x -- it moved in 1.0 and went in 2.0.
+dev = ["webauthn>=2.0,<4", "soft-webauthn>=0.1,<0.2", "fido2>=0.9,<1"]
+
+[project.urls]
+Homepage = "https://github.com/YOURNAME/django-llmgate"
+Source = "https://github.com/YOURNAME/django-llmgate"
+Issues = "https://github.com/YOURNAME/django-llmgate/issues"
+Changelog = "https://github.com/YOURNAME/django-llmgate/blob/main/CHANGELOG.md"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["llmgate*"]
+
+[tool.setuptools.package-data]
+llmgate = ["templates/llmgate/*.html", "static/llmgate/*.js"]

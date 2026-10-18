@@ -1,0 +1,7 @@
+{% extends "demoapp/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<h1>{{ title }}</h1>
+<div class="card"><p>{{ blurb }}</p>
+<p class="muted">Try <code>curl localhost:8000{{ request.path }}</code> and compare.</p></div>
+{% endblock %}
